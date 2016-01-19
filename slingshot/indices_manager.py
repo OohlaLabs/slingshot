@@ -24,7 +24,7 @@ class IndicesManagerClient(NamespacedClient):
         raise IndexDoesNotExist("alias or index '{}' doesn't exist".format(alias))
 
     def has_alias(self, index, alias):
-        return self.client.indices.exists_alias(alias, index=index)
+        return self.client.indices.exists_alias(name=alias, index=index)
 
     def has_read_alias(self, index):
         return self.has_alias(index, self._read_alias(index))
@@ -117,7 +117,7 @@ class IndicesManagerClient(NamespacedClient):
             raise IndexDoesNotExist("index '{}' does not exist".format(index))
 
         if self.is_managed(index):
-            raise IndexAlreadyManaged("index '{}' is already managed")
+            raise IndexAlreadyManaged("index '{}' is already managed".format(index))
 
         self.add_alias(index, self._write_alias(index))
 
@@ -126,7 +126,7 @@ class IndicesManagerClient(NamespacedClient):
             raise IndexDoesNotExist("index '{}' does not exist".format(index))
 
         if not self.is_managed(index):
-            raise IndexNotManaged("index '{}' is not managed, call manage first")
+            raise IndexNotManaged("index '{}' is not managed, call manage first".format(index))
 
         source_index = ','.join(self.real_names(index))
         target_index = self._generate_name(index)
