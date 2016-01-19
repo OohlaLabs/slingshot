@@ -195,6 +195,11 @@ All contributions and comments are welcome. Simply create a pull request or repo
 Changelog
 =========
 
+v0.0.3
+------
+* Fix client.indices.exists_alias parameter for elasticsearch>=1.9 compat
+
+
 v0.0.2
 ------
 * Fix six requirement to minimum version instead of exact version
